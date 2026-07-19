@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TMNT: The Arcade Game — Port para Mega Drive · Devlog</title>
+<meta name="description" content="Diario de desarrollo del port de TMNT: The Arcade Game para Sega Mega Drive, hecho en C con SGDK. Devlog técnico y descargas de ROM." />
+<meta name="theme-color" content="#0d120d" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="TMNT Arcade — Port para Mega Drive" />
+<meta property="og:description" content="Devlog técnico y ROMs de un port fan de TMNT: The Arcade Game a la Sega Mega Drive (SGDK)." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a href="#top" class="brand">
+    <span class="brand-mark">TMNT</span>
+    <span class="brand-sub">MD · DEVLOG</span>
+  </a>
+  <nav class="nav">
+    <a href="#devlog">Devlog</a>
+    <a href="#descargas">Descargas</a>
+    <a href="#proyecto">Proyecto</a>
+    <a class="nav-ext" data-repo-link href="#" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Sega Mega Drive · SGDK · C</p>
+      <h1 class="hero-title">TMNT<span class="tsub">: The Arcade Game</span></h1>
+      <p class="hero-tag">Port fan del clásico de arcade a la <strong>Mega Drive</strong> — diario de desarrollo y compilaciones jugables.</p>
+      <div class="hero-chips">
+        <span class="chip chip-on">Nivel 1 jugable</span>
+        <span class="chip">1P / 2P coop</span>
+        <span class="chip">Sprites ripeados del arcade</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#descargas" class="btn btn-primary">▸ Descargar ROM</a>
+        <a href="#devlog" class="btn btn-ghost">Leer el devlog</a>
+      </div>
+    </div>
+    <div class="hero-crt" aria-hidden="true">
+      <div class="crt-screen">
+        <div class="crt-line l1">SCENE 1 — FIRE!</div>
+        <div class="crt-line l2">WE GOTTA GET</div>
+        <div class="crt-line l3">APRIL OUT!!</div>
+        <div class="crt-cursor">_</div>
+      </div>
+      <div class="crt-base"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="Datos del proyecto">
+    <div class="stat"><span class="stat-num" data-count="4">4</span><span class="stat-lbl">tortugas jugables</span></div>
+    <div class="stat"><span class="stat-num" data-count="23">23</span><span class="stat-lbl">foot soldiers en el nivel</span></div>
+    <div class="stat"><span class="stat-num" data-count="1376">1376</span><span class="stat-lbl">px de ancho del nivel</span></div>
+    <div class="stat"><span class="stat-num" data-suffix="~" data-count="1400">1400</span><span class="stat-lbl">tiles de VRAM a repartir</span></div>
+  </section>
+
+  <!-- DEVLOG -->
+  <section id="devlog" class="section">
+    <div class="section-head">
+      <h2 class="section-title">// Devlog</h2>
+      <p class="section-sub">Bitácora técnica del desarrollo, de lo más nuevo a lo más viejo.</p>
+    </div>
+
+    <div class="filters" id="filters" role="tablist" aria-label="Filtrar por categoría"></div>
+
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- DESCARGAS -->
+  <section id="descargas" class="section section-alt">
+    <div class="section-head">
+      <h2 class="section-title">// Descargas</h2>
+      <p class="section-sub">ROMs compiladas del port. Corrélas en un emulador (BlastEm, Gens) o en hardware real vía flashcart.</p>
+    </div>
+    <div class="builds" id="builds"></div>
+    <p class="builds-note">Proyecto fan sin fines de lucro. Las ROMs no incluyen material comercial de Konami; son una recreación con fines de preservación y aprendizaje.</p>
+  </section>
+
+  <!-- PROYECTO -->
+  <section id="proyecto" class="section">
+    <div class="section-head">
+      <h2 class="section-title">// Sobre el proyecto</h2>
+    </div>
+    <div class="about">
+      <div class="about-col">
+        <h3>Qué es</h3>
+        <p>Un port desde cero de <em>TMNT: The Arcade Game</em> (Konami, 1989) a la Sega Mega Drive, escrito en C sobre <strong>SGDK</strong>. El objetivo de esta etapa es un primer nivel completamente jugable: la Escena 1, el departamento en llamas donde está atrapada April.</p>
+        <p>El corazón técnico está en pelear contra las limitaciones del hardware — sobre todo el presupuesto de VRAM (~1400 tiles) que hay que repartir entre fondo, fuego animado y sprites grandes de 104×104.</p>
+      </div>
+      <div class="about-col">
+        <h3>Herramientas</h3>
+        <ul class="tool-list">
+          <li><b>SGDK</b> — motor y toolchain (C)</li>
+          <li><b>Aseprite</b> — spritesheets y tiles</li>
+          <li><b>VS Code + Genesis Code</b></li>
+          <li><b>BlastEm / Gens</b> — testing</li>
+          <li><b>DefleMask / VGM</b> — audio (driver XGM2)</li>
+        </ul>
+        <h3>Créditos</h3>
+        <p class="credits">Desarrollo: <b>Gustavo Valenzuela</b>.<br/>Sprites ripeados del arcade por <b>Napalm</b>.<br/>SGDK por <b>Stéphane Dallongeville</b>.<br/>Personajes © Konami — proyecto fan no comercial.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>TMNT Arcade · Mega Drive Port</span>
+  <span class="foot-dim">Devlog generado estáticamente · <a data-repo-link href="#" target="_blank" rel="noopener">Repositorio</a></span>
+</footer>
+
+<script src="data/devlog.js"></script>
+<script src="data/builds.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
