@@ -12,14 +12,52 @@ window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización
 
 window.DEVLOG = [
   {
+    date: "2026-07-20",
+    part: "noche · cont.",
+    title: "Ajustes del KO, escena de Game Over y bug de scroll",
+    tags: ["Gameplay", "Motor"],
+    body: `
+Tres correcciones tras probar el HUD y la muerte.
+
+**Frame exacto del KO.** La pose de tortuga tirada es el frame 11 (la "12a") de \`ANIM_HIT_BEHIND_2\`. Antes se reproducía la animación entera (loop off) y, como los 12 frames a FAST 7 tardan ~84 frames pero el KO dura 70, la tortuga revivía ANTES de llegar a la pose. Ahora se salta DIRECTO al frame 11 con la auto-animación apagada (\`SPR_setAutoAnimation(FALSE)\` + \`SPR_setAnimAndFrame\`) y se congela ahí; al revivir se reactiva la auto-animación.
+
+**Escena de Game Over.** Nueva \`SCENE_GAME_OVER\` (\`showGameOver\` en \`scenes.c\`, caso en \`main.c\`). Muestra "GAME OVER" en blanco sobre negro (fuente por defecto, blanco puesto en el índice 15 de PAL0), espera ~4s o START, y reinicia desde el logo de SEGA. El nivel ahora sale a esta escena en vez de ir directo a SEGA.
+
+**Bug de scroll heredado.** Al reiniciar tras un game over, el logo TMNT del menú aparecía corrido a la derecha. Causa: \`clearScene()\` limpiaba los planos pero NO reseteaba el scroll, y el nivel deja BG_B en \`-cameraX\`. Se agregó el reset de scroll H/V de ambos planos en \`clearScene()\`.
+`
+  },
+  {
+    date: "2026-07-20",
+    part: "noche",
+    title: "Contenido del HUD: barra de vida, vidas y puntaje",
+    tags: ["Gameplay", "Motor"],
+    body: `
+Se llenó el marco del HUD con sus tres indicadores, estilo arcade, sin tocar el tamaño del marco: todo entra en el \`hud_1p.png\`/\`hud_2p.png\` original (72x32), en las 2 filas de tiles de interior útil.
+
+**Distribución compacta (como el arcade).** Fila superior = "1UP" (pintado en el arte) + PUNTAJE alineado a la derecha; fila inferior = VIDAS a la izquierda + BARRA a la derecha. Nada pisa el fondo del nivel: todo queda en la franja negra superior. (Un primer intento agrandó el marco a 72x48, pero quedó demasiado alto; se volvió al 72x32 achicando la barra.)
+
+**Barra de vida (\`hp_bar.png\`, 11 frames de 32x8).** Frame 0 = 10 barras, frame 10 = 0 barras. El arte original era 32x16; se recortó por script a 32x8 (una fila de tiles) aprovechando que los segmentos son columnas uniformes, para que quepa junto al puntaje en las 2 filas del marco. Comparte la paleta de las tortugas (PAL1). Se dibuja como **TILES en BG_A** (prioridad alta, igual que el marco), NO como sprite: no gasta presupuesto de \`SPR_initEx\` ni pelea con el layering sprite/plano. Un frame (4x1 = 4 tiles) vive en VRAM por jugador y, al recibir un golpe, se pisa con el frame siguiente vía DMA — la misma técnica de streaming que el fuego. En \`.res\` va \`NONE NONE\` para indexar cada frame directo desde ROM (\`frame N -> tile N*4\`).
+
+**Vida / vidas / puntaje en el jugador.** \`Player\` ganó \`health\` (0..10, arranca lleno), \`lives\` (arranca en 3) y \`score\`. Cada golpe de un foot soldier resta una barra (\`damagePlayer\`); al vaciarse se pierde una vida y la barra se recarga. Matar un foot soldier suma 1 al puntaje del jugador que lo remató (se detecta la transición a \`ENEMY_STATE_DEAD\` en el bucle de colisiones de \`scenes.c\`).
+
+**Vidas y puntaje como TEXTO.** Fuente por defecto (\`VDP_drawText\`) sobre BG_A. Se dibujan en **PAL3** aprovechando que la paleta "flash" es blanco puro en todos sus índices → texto blanco sin gastar una línea propia. El HUD cachea lo último dibujado y solo reescribe VRAM cuando algo cambia.
+
+**Knockout al perder una vida.** Cuando se agota la barra, la tortuga entra en \`STATE_KO\` y muestra el último frame de \`ANIM_HIT_BEHIND_2\` (la pose tirada) durante \`PLAYER_KO_FRAMES\` (~1.2s) antes de revivir. Al revivir se recarga la barra y arranca la invulnerabilidad de respawn.
+
+**Parpadeo sólo al revivir.** Se separó la invulnerabilidad "lógica" (\`invincible\`, sin efecto visual) del parpadeo (\`blinkTimer\`). Un golpe normal ya NO hace parpadear al sprite (queda visible durante sus i-frames); el parpadeo clásico quedó reservado para el respawn tras perder una vida.
+
+**Game over.** Al llegar a 0 vidas se muestra la pose de knockeado y recién ahí se corta el nivel (\`isPlayerGameOver\` devuelve el flag \`gameOver\`, que se activa al final del KO).
+`
+  },
+  {
     date: "2026-07-19",
     part: "noche · cont.",
     title: "Pared diagonal del final del nivel",
     tags: ["Gameplay", "Motor"],
     body: `
-Comparando contra el arcade original apareció un bug de colisión: al final del nivel hay un hueco de escalera / *fire escape* dibujado en el fondo **en perspectiva** (diagonal), pero el límite de movimiento era una línea vertical recta. Resultado: en las lanes de atrás (más cerca del fondo) el personaje podía caminar "sobre" la pared dibujada, quedando parado en el aire encima de la estructura.
+Comparando contra el arcade original apareció un bug de colisión: al final del nivel hay un hueco de escalera / * fire escape * dibujado en el fondo ** en perspectiva ** (diagonal), pero el límite de movimiento era una línea vertical recta.Resultado: en las lanes de atrás(más cerca del fondo) el personaje podía caminar "sobre" la pared dibujada, quedando parado en el aire encima de la estructura.
 
-**Solución:** se midió el borde sólido real directamente sobre \`bg01_completa.png\` (un script en Python que detecta dónde el color de piso deja de ser piso). Dio un punto de referencia en cada extremo de la lane — X≈1308 en la lane del fondo (Y=142) y X≈1352 en la del frente (Y=200) — y con esos dos puntos se **interpola linealmente** el tope de X real según la profundidad de cada personaje, en vez de un límite fijo.
+** Solución:** se midió el borde sólido real directamente sobre \`bg01_completa.png\` (un script en Python que detecta dónde el color de piso deja de ser piso). Dio un punto de referencia en cada extremo de la lane — X≈1308 en la lane del fondo (Y=142) y X≈1352 en la del frente (Y=200) — y con esos dos puntos se **interpola linealmente** el tope de X real según la profundidad de cada personaje, en vez de un límite fijo.
 
 Se aplicó tanto al jugador (\`levelEndWallX\` en \`player.c\`) como a los foot soldiers (\`enemyMaxX\` en \`enemy.c\`): persecución, lunge del kick, knockback y separación de grupo. Ya nadie cruza la pared, en ninguna lane.
 `

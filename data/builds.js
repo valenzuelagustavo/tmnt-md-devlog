@@ -16,6 +16,17 @@
  */
 
 window.BUILDS = [
+
+    {
+    version: "v0.2.0",
+    codename: "HUD & HP",
+    date: "2026-07-20",
+    status: "available",
+    file: "tmnt-md_scene1_v0.2.0.bin",
+    size: "",
+    notes: "Sistema de HP y barra de vida, animación de muerte del foot soldier y alcance/daño por tortuga.",
+    highlights: ["Barra de vida", "Muerte enemiga", "Stats por personaje"]
+  },
   {
     version: "v0.1.0",
     codename: "Scene 1 — Fire!",
@@ -27,13 +38,14 @@ window.BUILDS = [
     highlights: ["1P / 2P coop", "23 foot soldiers", "Fuego por streaming de tiles"]
   },
   {
-    version: "v0.2.0",
-    codename: "HUD & HP",
+    version: "v0.3.0",
+    codename: "Scene 1 — Fire!",
     date: "",
     status: "soon",
     file: "",
     size: "",
-    notes: "En desarrollo: sistema de HP y barra de vida, animación de muerte del foot soldier y alcance/daño por tortuga.",
-    highlights: ["Barra de vida", "Muerte enemiga", "Stats por personaje"]
-  }
+    notes: "Proximamente: Animación completa de foot soldiers, ubicaciones de los enemigos acorde al arcade. Robot del latigo del final.",
+    highlights: ["1P / 2P coop", "23 foot soldiers", "Fuego por streaming de tiles"]
+  },
+
 ];
