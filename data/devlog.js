@@ -54,7 +54,7 @@ Tres correcciones tras probar el HUD y la muerte.
     title: "Contenido del HUD: barra de vida, vidas y puntaje",
     tags: ["Gameplay", "Motor"],
     media: [
-      { src: "2026-07-21_hud.png", caption: "HUD en acción: barra de vida, vidas y puntaje" }
+      { src: "2026-07-21_hud.gif", caption: "HUD en acción: barra de vida, vidas y puntaje" }
     ],
     body: `
 Se llenó el marco del HUD con sus tres indicadores, estilo arcade, sin tocar el tamaño del marco: todo entra en el \`hud_1p.png\`/\`hud_2p.png\` original (72x32), en las 2 filas de tiles de interior útil.
@@ -187,7 +187,7 @@ Se fijó también el mapa de paletas del nivel: PAL0 fondo, PAL1 tortugas (las 4
     title: "Fuente arcade y streaming del fondo",
     tags: ["Motor", "Optimización", "Arte", "Audio"],
     media: [
-      { src: "2026-07-15_scroll.gif", caption: "Scroll del nivel por ventana circular de columnas" }
+      { src: "2026-07-15 fuente arcade.gif", caption: "El título de la Escena 1 apareciendo letra por letra con la fuente del arcade" }
     ],
     body: `
 **Fuente del arcade** ripeada y adaptada (ASCII 32..126) para el título del nivel: *"SCENE 1 — FIRE! WE GOTTA GET APRIL OUT!!"* apareciendo letra por letra (typewriter con skip por START). Lección: la fuente se exporta con \`TILESET ... NONE NONE\` porque la deduplicación de rescomp rompe el mapeo 1:1 entre carácter ASCII y tile.
