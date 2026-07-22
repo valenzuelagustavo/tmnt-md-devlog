@@ -39,7 +39,7 @@ window.BUILDS = [
   },
   {
     version: "v0.3.0",
-    codename: "Scene 1 — Fire!",
+    codename: "New enemy animations, new enemy",
     date: "",
     status: "soon",
     file: "",

@@ -64,6 +64,34 @@ function renderFilters() {
   });
 }
 
+// Carpeta donde viven las capturas / gifs del devlog.
+const MEDIA_DIR = "assets/images/devlog/";
+
+/* Render de capturas/gifs de una entrada. Cada slot muestra un
+   PLACEHOLDER (borde punteado + nombre del archivo esperado) hasta que
+   la imagen real exista: al cargar bien, el onload revela la imagen y
+   oculta el placeholder. Así se pueden dejar huecos y subir los
+   archivos después sin tocar el código. */
+function renderMedia(media) {
+  if (!media || !media.length) return "";
+  const shots = media.map(m => {
+    const file = escapeHtml(m.src || "");
+    const cap = escapeHtml(m.caption || "");
+    const capAttr = cap.replace(/"/g, "&quot;");   // seguro dentro de alt="..."
+    return `<figure class="shot" data-file="${file}">
+      <img src="${MEDIA_DIR}${encodeURIComponent(m.src || "")}" alt="${capAttr}" loading="lazy"
+           onload="this.closest('.shot').classList.add('is-loaded')">
+      <div class="shot-ph" aria-hidden="true">
+        <span class="ph-icon">▣</span>
+        <span class="ph-label">captura pendiente</span>
+        <span class="ph-file">${file}</span>
+      </div>
+      ${cap ? `<figcaption>${cap}</figcaption>` : ""}
+    </figure>`;
+  }).join("");
+  return `<div class="entry-media">${shots}</div>`;
+}
+
 function renderTimeline() {
   const tl = document.getElementById("timeline");
   const entries = [...(window.DEVLOG || [])].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
@@ -78,6 +106,7 @@ function renderTimeline() {
         <h3 class="entry-title">${escapeHtml(e.title)}</h3>
         <div class="entry-tags">${tags}</div>
         <div class="entry-body">${renderMarkdown(e.body)}</div>
+        ${renderMedia(e.media)}
       </div>
     </article>`;
   }).join("");

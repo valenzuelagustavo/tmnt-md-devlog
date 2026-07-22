@@ -224,6 +224,43 @@ body {
 }
 .entry-body blockquote strong { color: var(--pizza); }
 
+/* --- Capturas / gifs del devlog --- */
+.entry-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0c130c;
+}
+.shot img {
+  display: none;              /* oculta hasta que cargue (evita el ícono roto) */
+  width: 100%; height: auto;
+  image-rendering: pixelated; /* el pixel-art de la MD se ve nítido */
+}
+.shot.is-loaded img { display: block; }
+.shot.is-loaded .shot-ph { display: none; }
+.shot figcaption {
+  font-family: var(--font-term); font-size: 15px; color: var(--ink-dim);
+  padding: 6px 10px; border-top: 1px solid var(--line); letter-spacing: .3px;
+}
+/* Placeholder: visible mientras no exista el archivo real */
+.shot-ph {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; aspect-ratio: 16 / 10; padding: 16px; text-align: center;
+  background: repeating-linear-gradient(45deg, #0e150e 0 10px, #0b110b 10px 20px);
+  border-bottom: 1px dashed var(--green-dk);
+}
+.shot-ph .ph-icon  { font-family: var(--font-pixel); font-size: 20px; color: var(--green-dk);
+  text-shadow: 0 0 10px rgba(79,208,97,.3); }
+.shot-ph .ph-label { font-family: var(--font-term); font-size: 16px; color: var(--pizza); letter-spacing: 1px; }
+.shot-ph .ph-file  { font-family: var(--font-term); font-size: 14px; color: var(--ink-dim); word-break: break-all; }
+
 /* --- Builds --- */
 .builds { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
 .build {

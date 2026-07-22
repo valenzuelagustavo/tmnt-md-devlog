@@ -12,6 +12,28 @@ window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización
 
 window.DEVLOG = [
   {
+    date: "2026-07-22",
+    part: "",
+    title: "Voz de arranque, globo de diálogo y puertas que escupen enemigos",
+    tags: ["Audio", "Gameplay", "Arte", "Optimización"],
+    media: [
+      { src: "2026-07-22_voice_over.gif", caption: "Voice over + globo \"Attack!!\" al arrancar el nivel" },
+      { src: "2026-07-22_foot_soldier_door.gif", caption: "Un foot soldier rompe la puerta y entra al combate" },
+      { src: "2026-07-22_explosion.gif", caption: "Muerte del foot soldier con explosión" }
+    ],
+    body: `
+Sesión larga con tres frentes: darle voz al arranque del nivel, ampliar al foot soldier, y convertir las puertas del fondo en puntos de spawn.
+
+**Voice over + globo "Attack!!".** El grito va como sample **PCM del driver XGM2** (recurso \`WAV attack_vo\`, resampleado a 13.3 kHz y alineado a 256 bytes), disparado con \`XGM2_playPCMEx\` en el canal PCM 2 con prioridad 15 — así suena por encima de la música del nivel (canal 1) sin que ésta lo pise. El **globo** (\`attack_bubble\`, 64x32) comparte la paleta de las tortugas (PAL1), va en posición fija de pantalla (independiente de jugador y cámara) y cicla aparecer → fijo → parpadeo → desaparecer, todo por tiempo. Se dispara TODO apenas arranca el nivel; de paso, el jugador ahora nace a 5 tiles del borde izquierdo y el primer foot soldier ya queda visible pegado al borde derecho, entrando hacia el player.
+
+> **Lección a los golpes:** al principio no se escuchaba nada. No era el canal ni el código: el WAV venía grabado bajísimo (pico al 22%, RMS ~4.5% de la escala). En el DAC de 8 bits y con la música arriba, un sample flojo es lisa y llanamente inaudible. Se normalizó con compresión + makeup a ~24% RMS y apareció. **Regla nueva:** preparar los WAV (normalizar/comprimir) y verificar la AMPLITUD, no sólo el formato.
+
+**Sheet ampliado + muerte con explosión.** El spritesheet del foot soldier pasó de 5 a **8 animaciones** (grilla 5x8, frames 104x104): además de idle / walk / patada / uppercut / walk-up, ahora hay **explosión**, **golpe directo** y **rotura de puerta**. rescomp detecta las filas solo — no hubo que tocar \`enemies.res\`. Al morir, el foot soldier reproduce \`ANIM_EXPLODE\` (una vez, sin loop) en vez de quedarse en idle, y se saltea el flash blanco en el golpe fatal para que se vean los colores de la explosión. El directo se sumó a la rotación de ataques al azar (misma duración e hitbox que el uppercut).
+
+**Puertas como spawn points.** \`door_lvl_1\` (40x80) se dibuja sobre cada uno de los 3 huecos de puerta abierta del fondo (centros de mundo **429, 718, 846**, medidos sobre \`bg01_completa.png\`), compartiendo la paleta del **fondo** (PAL0) reindexada — cero líneas de paleta. **Trigger por cercanía:** cuando el player pasa, la puerta queda "armada"; en cuanto hay cupo de activos (\`MAX_ACTIVE_ENEMIES\`) se remueve el sprite y aparece un foot soldier que la ROMPE con \`ANIM_BREAK_DOOR\` (arrancando desde el 2do frame) antes de volverse un enemigo normal. Nuevo estado \`ENEMY_STATE_SPAWNING\`: sin IA ni colisión mientras rompe. Los sprites de puerta se crean/sueltan según visibilidad; peor caso en 2 jugadores medido en **~544 de 600 tiles** de sprite — entra sin tocar el presupuesto de \`SPR_initEx\`.
+`
+  },
+  {
     date: "2026-07-20",
     part: "noche · cont.",
     title: "Ajustes del KO, escena de Game Over y bug de scroll",
@@ -31,6 +53,9 @@ Tres correcciones tras probar el HUD y la muerte.
     part: "noche",
     title: "Contenido del HUD: barra de vida, vidas y puntaje",
     tags: ["Gameplay", "Motor"],
+    media: [
+      { src: "2026-07-21_hud.png", caption: "HUD en acción: barra de vida, vidas y puntaje" }
+    ],
     body: `
 Se llenó el marco del HUD con sus tres indicadores, estilo arcade, sin tocar el tamaño del marco: todo entra en el \`hud_1p.png\`/\`hud_2p.png\` original (72x32), en las 2 filas de tiles de interior útil.
 
@@ -82,6 +107,9 @@ Efecto colateral bueno: el Y-sorting (\`SPR_setDepth\`) y el alcance del jump ki
     part: "tarde",
     title: "Recalibración del salto y el especial",
     tags: ["Gameplay"],
+    media: [
+      { src: "2026-07-19_jump-kick.gif", caption: "Jump kick con ímpetu y el saltito del especial" }
+    ],
     body: `
 Sesión de *game feel* sobre el control de las tortugas.
 
@@ -99,6 +127,9 @@ Sesión de *game feel* sobre el control de las tortugas.
     part: "18–19 jul",
     title: "De demo técnica a juego jugable",
     tags: ["Gameplay"],
+    media: [
+      { src: "2026-07-19_combat.gif", caption: "Oleada de foot soldiers con IA de grupo y combos" }
+    ],
     body: `
 Tanda grande de *game feel*, en fases.
 
@@ -120,6 +151,9 @@ Además: pantalla de créditos SGDK bilingüe ES/EN, cámara con dead-zone y top
     part: "",
     title: "El fuego, el sheet nuevo del foot soldier y la VRAM",
     tags: ["Optimización", "Arte", "Gameplay"],
+    media: [
+      { src: "2026-07-18_fire.gif", caption: "Fuego en primer plano por streaming de tiles" }
+    ],
     body: `
 Sesión intensa. Entra el spritesheet definitivo del foot soldier (grilla 5×5 de 104×104, la misma que las tortugas) y el fuego del primer plano. Tres batallas técnicas.
 
@@ -152,6 +186,9 @@ Se fijó también el mapa de paletas del nivel: PAL0 fondo, PAL1 tortugas (las 4
     part: "",
     title: "Fuente arcade y streaming del fondo",
     tags: ["Motor", "Optimización", "Arte", "Audio"],
+    media: [
+      { src: "2026-07-15_scroll.gif", caption: "Scroll del nivel por ventana circular de columnas" }
+    ],
     body: `
 **Fuente del arcade** ripeada y adaptada (ASCII 32..126) para el título del nivel: *"SCENE 1 — FIRE! WE GOTTA GET APRIL OUT!!"* apareciendo letra por letra (typewriter con skip por START). Lección: la fuente se exporta con \`TILESET ... NONE NONE\` porque la deduplicación de rescomp rompe el mapeo 1:1 entre carácter ASCII y tile.
 
