@@ -239,18 +239,17 @@ body {
   background: #0c130c;
 }
 .shot img {
-  display: none;              /* oculta hasta que cargue (evita el ícono roto) */
+  display: block;             /* la imagen se muestra por defecto */
   width: 100%; height: auto;
   image-rendering: pixelated; /* el pixel-art de la MD se ve nítido */
 }
-.shot.is-loaded img { display: block; }
-.shot.is-loaded .shot-ph { display: none; }
 .shot figcaption {
   font-family: var(--font-term); font-size: 15px; color: var(--ink-dim);
   padding: 6px 10px; border-top: 1px solid var(--line); letter-spacing: .3px;
 }
-/* Placeholder: visible mientras no exista el archivo real */
-.shot-ph {
+/* Placeholder: oculto salvo que la imagen falle (onerror -> .is-empty) */
+.shot-ph { display: none; }
+.shot.is-empty .shot-ph {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 6px; aspect-ratio: 16 / 10; padding: 16px; text-align: center;
   background: repeating-linear-gradient(45deg, #0e150e 0 10px, #0b110b 10px 20px);

@@ -67,11 +67,11 @@ function renderFilters() {
 // Carpeta donde viven las capturas / gifs del devlog.
 const MEDIA_DIR = "assets/images/devlog/";
 
-/* Render de capturas/gifs de una entrada. Cada slot muestra un
-   PLACEHOLDER (borde punteado + nombre del archivo esperado) hasta que
-   la imagen real exista: al cargar bien, el onload revela la imagen y
-   oculta el placeholder. Así se pueden dejar huecos y subir los
-   archivos después sin tocar el código. */
+/* Render de capturas/gifs de una entrada. La imagen se muestra por
+   defecto; si el archivo todavía no existe (404), el onerror la oculta
+   y marca el slot como vacío para mostrar el PLACEHOLDER (borde
+   punteado + nombre del archivo esperado). Así se pueden dejar huecos y
+   subir los archivos después sin tocar el código. */
 function renderMedia(media) {
   if (!media || !media.length) return "";
   const shots = media.map(m => {
@@ -79,8 +79,8 @@ function renderMedia(media) {
     const cap = escapeHtml(m.caption || "");
     const capAttr = cap.replace(/"/g, "&quot;");   // seguro dentro de alt="..."
     return `<figure class="shot" data-file="${file}">
-      <img src="${MEDIA_DIR}${encodeURIComponent(m.src || "")}" alt="${capAttr}" loading="lazy"
-           onload="this.closest('.shot').classList.add('is-loaded')">
+      <img src="${MEDIA_DIR}${encodeURIComponent(m.src || "")}" alt="${capAttr}"
+           onerror="this.style.display='none';this.closest('.shot').classList.add('is-empty');">
       <div class="shot-ph" aria-hidden="true">
         <span class="ph-icon">▣</span>
         <span class="ph-label">captura pendiente</span>
