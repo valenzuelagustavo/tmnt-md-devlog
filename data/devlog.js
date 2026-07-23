@@ -11,6 +11,21 @@
 window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización", "Infra"];
 
 window.DEVLOG = [
+    {
+    date: "2026-07-23",
+    part: "",
+    title: "Trabajando con el sprite del robot",
+    tags: [ "Arte"],
+    media: [
+      { src: "2026-07-23_ride.gif", caption: "La animación de desplazamiento." },
+      { src: "2026-07-23_swapprite.png", caption: "Interfaz de Swapprite."}
+    ],
+    body: `
+Trabajando en la animacón del sprite del robot que sale del suelo al final del nivel. Pensando en si va a dar la VRAM.
+
+**ASEPRITE & SWAPPRITE al rescate.** Como en todo el proyecto, trabajo los \`SPRITES\`con ASEPRITE. Luego utilizo una app propia \`SWAPPRITE\` para reemplazar la paleta original (comunmente de muchos más colores) por alguna de las que ya tengo definidas para este nivel. En este caso voy a utilizar la misma de los Foot Soldiers ya que es la que mejor se adapto a los colores del enemigo. Si quiero poner variantes de colores en los Foot Soldiers voy a tener que hacer uso de la \`PAL3\` que me estaba reservando. En este momento esa paleta la estoy usando para el parpadeo de los enemigos al ser golpeados, pero creo que puedo implementar algo para sortear ese efecto de otra manera. Hablando de este enemigo en cuestión, trae un par de ataques que van a ser un quebradero de cabeza. El latigo que atrapa a las tortus y las electrocuta y el disparo del rayo laser (el primer proyectil del juego). Tengo dos ideas en la cabeza para lidiar con el latigo. Una es directamente usar el sprite ancho y que todo el latigo quepa en la animación y la otra es utilizar dos sprites, siendo el latigo extendido algo que spawnea unicamente cuando el robot hace la animación de lanzar el latigo. Ya iba a tener que utilizar esto para lanzar el rayo laser... También tengo que ripear directo del rom de arcade las animaciones de las tortugas siendo electrocutadas ya que en los ripeos que encontre en internet no estaban. Bueno, eso es todo por esta entrada. Van a ser días de mucha edición de pixeles y poco codigo.
+`
+  },
   {
     date: "2026-07-22",
     part: "",
