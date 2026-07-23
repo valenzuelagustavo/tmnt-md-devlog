@@ -220,6 +220,10 @@ Además: selección de 1 o 2 jugadores, cámara con dead-zone, y **XGM2** como d
     part: "",
     title: "Los assets definitivos",
     tags: ["Arte"],
+    media: [
+      { src: "2026-06-30_mike.gif", caption: "Animaciones para Mike" },
+      { src: "2026-06-30_raph.gif", caption: "Animaciones para Raph" }
+    ],
     body: `
 Día grande de arte. Las cuatro tortugas quedan en spritesheets de grilla 13×13 tiles (frames de **104×104 px**, 18 animaciones cada una: idle, patada, combo de 3 golpes, salto, patada en salto, caminatas, especial, hits de frente y de espalda, levantarse, agarrado).
 
