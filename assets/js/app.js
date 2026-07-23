@@ -8,7 +8,7 @@
 const CONFIG = {
   // Poné la URL de tu repo de GitHub. Si lo dejás vacío, los enlaces
   // "GitHub / Repositorio" se ocultan solos.
-  repoUrl: "https://github.com/valenzuelagustavo/tmnt-md-devlog.git"   
+  repoUrl: "https://github.com/valenzuelagustavo/TMNT-ARCADE-MEGADRIVE-PORT"   
 };
 
 /* ---------- Mini Markdown (subconjunto) ---------- */

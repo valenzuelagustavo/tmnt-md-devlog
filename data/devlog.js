@@ -188,6 +188,9 @@ Con el sheet nuevo, la IA se completó: movimiento vertical para alinearse en pr
     part: "16–17 jul",
     title: "Primeros enemigos",
     tags: ["Gameplay", "Optimización"],
+    media: [
+      { src: "2026-07-16_primer_footsoldier.gif", caption: "Primer footsoldier." }
+    ],
     body: `
 Primer foot soldier (sheet provisional de 7×8 tiles, solo idle y caminata) con IA básica de patrulla / persecución / ataque y spawns por trigger de cámara.
 
@@ -248,6 +251,9 @@ Primer commit y README. El proyecto se formaliza: estructura estándar de SGDK (
     part: "abril–mayo 2026",
     title: "Se retoma: intro y arquitectura de escenas",
     tags: ["Motor", "Arte", "Audio"],
+    media: [
+      { src: "2026-04-05_rocksteady_intro.gif", caption: "Intro con Rocksteady como protagonista." }
+    ],
     body: `
 Después de una pausa larga, el proyecto se retomó con dos frentes.
 
@@ -263,6 +269,10 @@ También de esta época: la música del nivel 1 (\`fire_v3.vgm\`) y la configura
     part: "febrero 2025",
     title: "Los primeros experimentos",
     tags: ["Arte", "Audio"],
+        media: [
+      { src: "2026-02-01_intento_intro.gif", caption: "Primer intento de crear el selector de personajes." },
+      { src: "2026-02-01_intento_definitivo.gif", caption: "Selector de personajes definitivo." }
+    ],
     body: `
 Antes de que existiera el repo, el proyecto arrancó como una serie de prototipos sueltos en SGDK. De esta época sobreviven los assets más viejos: el logo de TMNT y la pantalla de selección de personaje (retratos en escala de grises que se "encienden" al seleccionar, el cursor con forma de tortuga, la sheet de caras del HUD), la música de selección convertida a VGM desde el arcade, y las primeras pruebas de concepto del nivel 1: \`bg_test.png\` y \`firetest.png\`.
 
