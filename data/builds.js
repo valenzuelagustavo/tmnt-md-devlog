@@ -16,7 +16,16 @@
  */
 
 window.BUILDS = [
-
+    {
+    version: "v0.2.1",
+    codename: "Más enemigos. Atraviesan puertas.",
+    date: "2026-07-23",
+    status: "available",
+    file: "tmnt-md_scene1_v0.2.1.bin",
+    size: "",
+    notes: "Los enemigos atraviesan puertas y spawnean en el nivel.",
+    highlights: ["Animaciones", "Puertas que se rompen"]
+    },
     {
     version: "v0.2.0",
     codename: "HUD & HP",
