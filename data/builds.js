@@ -24,7 +24,7 @@ window.BUILDS = [
     file: "tmnt-md_scene1_v0.2.1.bin",
     size: "",
     notes: "Los enemigos atraviesan puertas y spawnean en el nivel.",
-    highlights: ["Animaciones", "Puertas que se rompen"]
+    highlights: ["Animaciones", "Puertas que se rompen", "Dos jugadores"]
     },
     {
     version: "v0.2.0",
