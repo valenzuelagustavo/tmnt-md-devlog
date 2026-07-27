@@ -50,7 +50,7 @@ Hasta ahora cuando golpeabas un enemigo hacia un flash blanco. Se elimino ya que
     tags: ["Audio", "Gameplay", "Arte", "Optimización"],
     media: [
       { src: "2026-07-26_ball_path.png", caption: "Primer path calculado de la bola" },
-      { src: "2026-07-26_Ball_stairs.gif", caption: "La bola callendo por las escaleras" },
+      { src: "2026-07-26_Ball_stairs.gif", caption: "La bola cayendo por las escaleras" },
       { src: "2026-07-26_robot_whip.gif", caption: "El robot y su molesto latigo" }
     ],
     body: `
