@@ -43,21 +43,6 @@ Se ajustaron los hitbox individuales de cada tortuga segun su arma, asi Donatell
 Hasta ahora cuando golpeabas un enemigo hacia un flash blanco. Se elimino ya que requeria la \`PAL3\` y ahora esa paleta esta siendo usada por el \`foot soldier\` naranja y proximamente por el blanco.
 `
   },
-  {
-    date: "2026-07-24",
-    part: "",
-    title: "Sprites, sprites, sprites y más sprites",
-    tags: [ "Arte"],
-    media: [
-      { src: "2026-07-24_original.png", caption: "La imagen original con más de 50 colores." },
-      { src: "2026-07-24_dos paletas.png", caption: "La imagen con dos paletas. 30 colores en total."}
-    ],
-    body: `
-La noche de ayer y hoy por la mañana estuve trabajando en ripear animaciones del foot soldier morado. También hice un rip de la imagen del final del level, cuando Shredder rapta a April. Fue interesante de trabajar ya que \`SWAPPRITE\` (mi app para trabajar con paletas de color) no me dio el resultado que esperaba. Al final termine componiendo la imagen con dos paletas y el resultado creo es bastante bueno. Hice el de las cuatro tortugas juntas y es el que va a quedar por ahora, aunque planeo que la tortuga que se muestre sea la elegida por el jugador (o las dos si se juega de a dos).
-
-Esa imagen ya está incluida en el código. Surgio un problema ya que primero cargaba la del plano B y luego la del A. La diferencia de carga hacia que el resultado sea feo. Lo solucione haciendo un fade desde negro. Asi aunque el plano A tarde un poco más no importa porque queda oculto en esa pantalla negra y el jugador ve la pantalla completa. 
-`
-  },
     {
     date: "2026-07-26",
     part: "",
