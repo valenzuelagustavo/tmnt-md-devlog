@@ -17,6 +17,16 @@
 
 window.BUILDS = [
     {
+    version: "v0.2.3",
+    codename: "Zonas definidas",
+    date: "2026-07-23",
+    status: "available",
+    file: "tmnt-md_scene1_v0.2.3.bin",
+    size: "",
+    notes: "Zonas de spawneo definidas, detalles graficos, efectos de sonido.",
+    highlights: ["Animaciones", "Fuego animado", "Sonidos"]
+    },
+    {
     version: "v0.2.2",
     codename: "¡Escena Shredder!",
     date: "2026-07-23",

@@ -11,6 +11,53 @@
 window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización", "Infra"];
 
 window.DEVLOG = [
+      {
+    date: "2026-07-27",
+    part: "",
+    title: "Spawneo de enemigos y detalles graficos",
+    tags: ["Gameplay", "Arte"],
+    media: [
+      { src: "2026-07-27_efecto_fuego.gif", caption: "Efecto de fuego en puertas" },
+      { src: "2026-07-27_fire_ascensor.gif", caption: "Efecto de fuego en ascensores" },
+    ],
+    body: `
+## 27 de julio — Animación de paleta en detalles del fuego
+
+**Animación en paleta**
+
+Se implemento una pequeña animación de los colores de la paleta que utilizaba para el fuego. Basicamente se intercambian los colores de ciertos indices para crear un efecto de animación. En el nivel se aplica a todo lo que sea fuego. A su vez agregue sprites decorativos a lo largo del nivel (detras de las puertas y dentro de los ascensores). Gracias a esto se comienza a sentir que es un edificio en llamas. 
+
+**La camara ahora se frena en puntos clave**
+
+Ya tenemos zonas del nivel definidas en las que la camara no deja al jugador avanzar hasta que elimine a los enemigos. También defini cuantos y desde donde entran los enemigos. Queda terminar de ripear animaciones de los \`foot soldiers\` para que pueda pulir su comportamiento al completo. 
+
+**La bola de hierro ya tiene sonido**
+
+La bola de hierro que cae por la escalera ya tiene sonido. Se utiliza un sample .wav en el CH3.
+
+**Se ajustaron hitbox**
+
+Se ajustaron los hitbox individuales de cada tortuga segun su arma, asi Donatello es el que más alcance tiene y Raphael el que menos. Más adelante tambien voy a modificar el daño que hace cada uno. Quizá sea alejarme un poco del arcade pero ya que es imposible hacer una conversion 1:1...
+
+**Se elimino el parpadeo blanco cuando golpeas a un enemigo** u
+Hasta ahora cuando golpeabas un enemigo hacia un flash blanco. Se elimino ya que requeria la \`PAL3\` y ahora esa paleta esta siendo usada por el \`foot soldier\` naranja y proximamente por el blanco.
+`
+  },
+  {
+    date: "2026-07-24",
+    part: "",
+    title: "Sprites, sprites, sprites y más sprites",
+    tags: [ "Arte"],
+    media: [
+      { src: "2026-07-24_original.png", caption: "La imagen original con más de 50 colores." },
+      { src: "2026-07-24_dos paletas.png", caption: "La imagen con dos paletas. 30 colores en total."}
+    ],
+    body: `
+La noche de ayer y hoy por la mañana estuve trabajando en ripear animaciones del foot soldier morado. También hice un rip de la imagen del final del level, cuando Shredder rapta a April. Fue interesante de trabajar ya que \`SWAPPRITE\` (mi app para trabajar con paletas de color) no me dio el resultado que esperaba. Al final termine componiendo la imagen con dos paletas y el resultado creo es bastante bueno. Hice el de las cuatro tortugas juntas y es el que va a quedar por ahora, aunque planeo que la tortuga que se muestre sea la elegida por el jugador (o las dos si se juega de a dos).
+
+Esa imagen ya está incluida en el código. Surgio un problema ya que primero cargaba la del plano B y luego la del A. La diferencia de carga hacia que el resultado sea feo. Lo solucione haciendo un fade desde negro. Asi aunque el plano A tarde un poco más no importa porque queda oculto en esa pantalla negra y el jugador ve la pantalla completa. 
+`
+  },
     {
     date: "2026-07-26",
     part: "",
