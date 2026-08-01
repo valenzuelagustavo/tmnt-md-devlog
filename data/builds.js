@@ -17,6 +17,16 @@
 
 window.BUILDS = [
     {
+    version: "v0.2.4",
+    codename: "Nuevo nivel, Boss",
+    date: "2026-07-23",
+    status: "available",
+    file: "tmnt-md_scene1_v0.2.4.bin",
+    size: "",
+    notes: "Nueva fase de la Scene 1 agregadas, Jefe de nivel. Nuevas animaciones.",
+    highlights: ["Animaciones", "Fuego animado", "Sonidos", "Graficos"]
+    },
+    {
     version: "v0.2.3",
     codename: "Zonas definidas",
     date: "2026-07-23",
@@ -24,7 +34,7 @@ window.BUILDS = [
     file: "tmnt-md_scene1_v0.2.3.bin",
     size: "",
     notes: "Zonas de spawneo definidas, detalles graficos, efectos de sonido.",
-    highlights: ["Animaciones", "Fuego animado", "Sonidos"]
+    highlights: ["Animaciones", "Fuego animado", "Sonidos", "Boss"]
     },
     {
     version: "v0.2.2",
