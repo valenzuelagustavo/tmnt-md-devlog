@@ -17,6 +17,16 @@
 
 window.BUILDS = [
     {
+    version: "v0.2.5",
+    codename: "Rapto de April",
+    date: "2026-07-23",
+    status: "available",
+    file: "tmnt-md_scene1_v0.2.5.bin",
+    size: "",
+    notes: "Aparición de Shredder y rapto de April. Voice over y globito de dialogo para Rocksteady.",
+    highlights: ["Animaciones", "Shredder", "Graficos"]
+    },
+    {
     version: "v0.2.4",
     codename: "Nuevo nivel, Boss",
     date: "2026-07-23",
@@ -78,13 +88,13 @@ window.BUILDS = [
   },
   {
     version: "v0.3.0",
-    codename: "New enemy animations, new enemy",
+    codename: "Nivel completo con musica",
     date: "",
     status: "soon",
     file: "",
     size: "",
-    notes: "Proximamente: Animación completa de foot soldiers, ubicaciones de los enemigos acorde al arcade. Robot del latigo del final.",
-    highlights: ["1P / 2P coop", "23 foot soldiers", "Fuego por streaming de tiles"]
+    notes: "Proximamente: Animación completa de foot soldiers, ubicaciones de los enemigos acorde al arcade. Música.",
+    highlights: ["1P / 2P coop", "Todos los foot soldiers", "Nivel completo"]
   },
 
 ];
