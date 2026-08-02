@@ -11,7 +11,47 @@
 window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización", "Infra"];
 
 window.DEVLOG = [
-      {
+  {
+    date: "2026-08-01",
+    part: "",
+    title: "Say your prayers turtles!",
+    tags: ["Gameplay", "Arte", "Scenes", "Boss"],
+    media: [
+      { src: "nuevo_lvl.gif", caption: "Nueva escena del level" },
+      { src: "drill_capsule.gif", caption: "La drill capsule aparece" },
+      { src: "flash_light_boss.gif", caption: "Efecto flash mide el HP del boss" },
+    ],
+    body: `
+
+**Hubo muchisimo avance estos días**
+
+Estoy por empezar a estudiar y ya se huele en el aire la falta de tiempo, eso me obligo a meteerle pata estos días al proyecto. Siguiendo impulsos y planes inconexos agregue nuevas animaciones para el Foot Soldier Violeta, nuevo comportamiento para el naranja, una nueva fase en el nivel y la aparición de Rocoso (Rocksteady) para darle un cierre al nivel. 
+Falta pulir el comportamiento del boss. Repensar algunos temas graficos. La drill capsule llevo al limite los graficos que se pueden mostrar en pantalla y me hizo experimentar los primeros parpadeos serios. 
+
+**Nuevos efectos de sonido**
+
+Encontre el audio con los que son presumiblemente todos los voice over y sonidos del juego. Tuve que pasarlos a  \`.wav\` de 8 bits para que pudieran ser agregados. Aún me falta agregar varios, pero los pocos que agregue le suman un bonito detalle al juego. 
+
+**Efecto flash**
+
+El efecto flash que se ve cuando le falta poca vida a Rocoso es el mismo que utilizaba al principio con los Foot soldiers. Al utilizar la \`PAL3\` y esta ser la misma que utiliza el texto del HUD estos tambien titilan. Eso se va a solucionar cuando reemplace los números por sprites.
+
+**Problemas que tengo que arreglar**
+
+Varios problemas vengo pateando y se suman algunos nuevos. Los detallo acá para recordarlos. 
+
+-Comportamiento del latigo del robot. Cuando atrapa al player depende la distancia hay errores graficos.
+-Bloqueo de camara en la parte con los dos ascensores. Se puede seguir avanzando y eso activa al robot. Puede traer problemas. (Note que en el arcade también y es posible saltearse al robot de esa manera).
+-Perdida de visibilidad de sprites en la salida del drill capsule. No se bien como puedo ahorrar VRAM acá. Espero se me ocurra algo.
+-Puerta de la drill capsule no se muestra cerrada. Tengo que extender la duracion del ultimo frame de animación.
+-Prioridad de la drill capsule. Se dibuja sobre el humo del techo del nivel y debe quedar atras.
+-Comportamiento de Rocoso. Por ahora tiene una IA muy deficiente y básica.
+-Ajuste de Hitboxes general. Alta prioridad Rocoso.
+
+No se si voy a tener tiempo de avanzar estas semanas que siguen. Hasta entonces para los que lean.
+`
+  },
+    {
     date: "2026-07-27",
     part: "",
     title: "Spawneo de enemigos y detalles graficos",
