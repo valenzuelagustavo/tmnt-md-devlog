@@ -12,7 +12,7 @@ window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización
 
 window.DEVLOG = [
     {
-    date: "2026-08-01",
+    date: "2026-08-09",
     part: "",
     title: "¡Tenemos música!",
     tags: ["Música", "Arte", "Audio", "Intro"],
