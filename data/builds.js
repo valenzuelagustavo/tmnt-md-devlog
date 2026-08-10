@@ -19,7 +19,7 @@ window.BUILDS = [
     {
     version: "v0.2.9",
     codename: "Música! Fire!",
-    date: "2026-07-23",
+    date: "2026-08-09",
     status: "available",
     file: "tmnt-md_v0.2.9.bin",
     size: "",
@@ -29,7 +29,7 @@ window.BUILDS = [
     {
     version: "v0.2.5",
     codename: "Rapto de April",
-    date: "2026-07-23",
+    date: "2026-08-01",
     status: "available",
     file: "tmnt-md_scene1_v0.2.5.bin",
     size: "",
@@ -39,7 +39,7 @@ window.BUILDS = [
     {
     version: "v0.2.4",
     codename: "Nuevo nivel, Boss",
-    date: "2026-07-23",
+    date: "2026-07-28",
     status: "available",
     file: "tmnt-md_scene1_v0.2.4.bin",
     size: "",
@@ -49,7 +49,7 @@ window.BUILDS = [
     {
     version: "v0.2.3",
     codename: "Zonas definidas",
-    date: "2026-07-23",
+    date: "2026-07-26",
     status: "available",
     file: "tmnt-md_scene1_v0.2.3.bin",
     size: "",
@@ -59,7 +59,7 @@ window.BUILDS = [
     {
     version: "v0.2.2",
     codename: "¡Escena Shredder!",
-    date: "2026-07-23",
+    date: "2026-07-25",
     status: "available",
     file: "tmnt-md_scene1_v0.2.2.bin",
     size: "",
