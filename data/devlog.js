@@ -11,6 +11,47 @@
 window.DEVLOG_CATEGORIES = ["Motor", "Gameplay", "Arte", "Audio", "Optimización", "Infra"];
 
 window.DEVLOG = [
+    {
+    date: "2026-08-01",
+    part: "",
+    title: "¡Tenemos música!",
+    tags: ["Música", "Arte", "Audio", "Intro"],
+    media: [
+      { src: "devlog_2026-08-09 231242.gif", caption: "Nuevo colaborador musical! SANSENPAI35!" },
+      { src: "devlog_2026-08-09 231417.gif", caption: "Primeros intentos de intro" },
+      { src: "devlog_2026-08-09 231555.gif", caption: "Nuevos detalles en el HUD y cartel de Hurry!" },
+    ],
+    body: `
+
+**¡¡Tenemos MÚSICA!!**
+
+Se sumo Sansenpai35 al desarrollo y va a aportar la música del port. En tiempo record se mando tremendo trabajo con la versión del tema del primer nivel Fire! ... Tiene canal de youtube e invito a todo el que le gusten los chiptunes de Master System, Megadrive y demás maravillas auditivas a pasarse, dejarle una suscribida, unos buenos me gusta y tremendos comentarios buena onda ¡Los merece!
+
+Su canal es: https://www.youtube.com/@sansenpai3556
+
+**Primeros intentos de intro**
+
+La intro me está dando más dolores de cabeza de lo que pensaba. Intente componerla con los rips pero me dio muchos problemas el manejo de planos... Opte entonces por hacer un scroll de la imagen completa pero no dejaba de glichear. Opte entonces por dividir la imagen en 4 chunks pero seguian los gliches. Como última medida (y es como quedo por ahora) dividi la imagen en 5 chunks de 304x512 c/u salvo el ultimo de 304x408 px y los cargue con overlap de 224 px para que no se "notara" ningún corte brusco en las  \`imagenes\`... Lamentablemente me daba tambien algunos problemas graficos en los cortes. Tecnicamente no deberia serlo porque creo que estoy dentro del limite de tiles... Pero bueno... agregue un flash blanco para ver si disfrasaba esos errores graficos, y si, los oculta... pero no estoy conforme. De momento no se me ocurre manera de encararlo. Lo dejare como un TODO. 
+
+**Agregado cartel de Hurry! y detalles en el HUD**
+
+Ahora el HUD tiene un \`Sprite\` con el retrato de la tortuga elegida. También agregue el cartel de Hurry! para cuando el jugador se queda quieto sin avanzar la camara por 6 segundos. Comparte \`paleta\` con las tortugas (como el resto del HUD).
+
+**Continue y selección de tortuga**
+
+Ahora cuando moris podes continuar la partida hasta 3 veces y elegir otra tortuga. Cuando jugas de a dos esos continues se comparten. No se puede elegir a la misma tortuga que el otro player.
+
+**Cosas por hacer y planes para el futuro**
+
+Por hacer queda definir bien el comportamiento de Rocksteady y su hitbox.
+Tratar de terminar la intro, es un pedido que se repitio siempre que comparti el proyecto.
+
+Como plan a futuro, planeo agregar personajes nuevos para elegir pero con un truco.
+Si en la pantalla de seleccion de cantidad de players se toca cierta combinacion y se elige jugar de a uno, planeo hacer personaje jugable a Slash. Ahora, si se hace la misma combinacion pero se elige de a dos jugadores, planeo hacer que se pueda jugar con Casey Jones y Raphael (con nuevo aspecto). Eso claro, muy a futuro.
+
+Antes de cerrar, hay un nuevo rom disponible con los agregados mencionados. ¡¡Disfruten la música!!
+`
+  },
   {
     date: "2026-08-01",
     part: "",
