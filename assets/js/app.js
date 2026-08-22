@@ -11,6 +11,48 @@ const CONFIG = {
   repoUrl: "https://github.com/valenzuelagustavo/TMNT-ARCADE-MEGADRIVE-PORT"   
 };
 
+/* ---------- i18n ----------
+   Cada página HTML define window.LANG ("es" | "en" | "pt") antes de
+   cargar este script. Los textos que genera JS salen de acá; el
+   contenido (devlog/builds) vive en data/*.js por idioma. */
+const I18N = {
+  es: {
+    locale: "es",
+    months: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+    all: "Todo",
+    soon: "Próximamente",
+    download: "▸ Descargar",
+    inDev: "en desarrollo",
+    emptyFilter: "Nada en esta categoría todavía.",
+    pendingShot: "captura pendiente"
+  },
+  en: {
+    locale: "en",
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    all: "All",
+    soon: "Coming soon",
+    download: "▸ Download",
+    inDev: "in development",
+    emptyFilter: "Nothing in this category yet.",
+    pendingShot: "screenshot pending"
+  },
+  pt: {
+    locale: "pt-BR",
+    months: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
+    all: "Tudo",
+    soon: "Em breve",
+    download: "▸ Baixar",
+    inDev: "em desenvolvimento",
+    emptyFilter: "Nada nesta categoria ainda.",
+    pendingShot: "captura pendente"
+  }
+};
+const T = I18N[window.LANG] || I18N.es;
+
+/* Prefijo hacia la raíz del sitio: cada página lo define ("./" en la
+   raíz, "../" desde /en/ y /pt/) para que roms/ e imágenes resuelvan. */
+const ROOT = window.SITE_ROOT || "";
+
 /* ---------- Mini Markdown (subconjunto) ---------- */
 function escapeHtml(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -40,18 +82,17 @@ function renderMarkdown(md) {
 }
 
 /* ---------- Fechas ---------- */
-const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 function fmtDate(iso) {
   const [y, m, d] = iso.split("-").map(Number);
-  return `${d} ${MONTHS[m - 1]} ${y}`;
+  return `${d} ${T.months[m - 1]} ${y}`;
 }
 
 /* ---------- Devlog ---------- */
-let activeFilter = "Todo";
+let activeFilter = T.all;
 
 function renderFilters() {
   const box = document.getElementById("filters");
-  const cats = ["Todo", ...(window.DEVLOG_CATEGORIES || [])];
+  const cats = [T.all, ...(window.DEVLOG_CATEGORIES || [])];
   box.innerHTML = cats.map(c =>
     `<button class="fbtn${c === activeFilter ? " active" : ""}" data-cat="${c}">${c}</button>`
   ).join("");
@@ -65,7 +106,7 @@ function renderFilters() {
 }
 
 // Carpeta donde viven las capturas / gifs del devlog.
-const MEDIA_DIR = "assets/images/devlog/";
+const MEDIA_DIR = ROOT + "assets/images/devlog/";
 
 /* Render de capturas/gifs de una entrada. La imagen se muestra por
    defecto; si el archivo todavía no existe (404), el onerror la oculta
@@ -83,7 +124,7 @@ function renderMedia(media) {
            onerror="this.style.display='none';this.closest('.shot').classList.add('is-empty');">
       <div class="shot-ph" aria-hidden="true">
         <span class="ph-icon">▣</span>
-        <span class="ph-label">captura pendiente</span>
+        <span class="ph-label">${T.pendingShot}</span>
         <span class="ph-file">${file}</span>
       </div>
       ${cap ? `<figcaption>${cap}</figcaption>` : ""}
@@ -95,8 +136,8 @@ function renderMedia(media) {
 function renderTimeline() {
   const tl = document.getElementById("timeline");
   const entries = [...(window.DEVLOG || [])].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-  const shown = entries.filter(e => activeFilter === "Todo" || (e.tags || []).includes(activeFilter));
-  if (!shown.length) { tl.innerHTML = `<p style="color:var(--ink-dim)">Nada en esta categoría todavía.</p>`; return; }
+  const shown = entries.filter(e => activeFilter === T.all || (e.tags || []).includes(activeFilter));
+  if (!shown.length) { tl.innerHTML = `<p style="color:var(--ink-dim)">${T.emptyFilter}</p>`; return; }
   tl.innerHTML = shown.map(e => {
     const tags = (e.tags || []).map(t => `<span class="tag" data-t="${t}">${t}</span>`).join("");
     const part = e.part ? `<span class="entry-part">· ${e.part}</span>` : "";
@@ -125,10 +166,10 @@ function renderBuilds() {
   box.innerHTML = builds.map((b, idx) => {
     const soon = b.status === "soon" || !b.file;
     const hl = (b.highlights || []).map(h => `<span>${escapeHtml(h)}</span>`).join("");
-    const dateTxt = b.date ? fmtDate(b.date) : "en desarrollo";
+    const dateTxt = b.date ? fmtDate(b.date) : T.inDev;
     const btn = soon
-      ? `<span class="dl disabled">Próximamente</span>`
-      : `<a class="dl" href="roms/${encodeURIComponent(b.file)}" download>▸ Descargar</a>`;
+      ? `<span class="dl disabled">${T.soon}</span>`
+      : `<a class="dl" href="${ROOT}roms/${encodeURIComponent(b.file)}" download>${T.download}</a>`;
     const size = soon ? "" : `<span class="build-size" data-size-for="${idx}">${b.size || "…"}</span>`;
     return `<div class="build${soon ? " soon" : ""}">
       <div class="build-top">
@@ -146,7 +187,7 @@ function renderBuilds() {
   builds.forEach((b, idx) => {
     if (b.status === "soon" || !b.file || b.size) return;
     const el = box.querySelector(`[data-size-for="${idx}"]`);
-    fetch(`roms/${encodeURIComponent(b.file)}`, { method: "HEAD" })
+    fetch(`${ROOT}roms/${encodeURIComponent(b.file)}`, { method: "HEAD" })
       .then(r => { const len = r.headers.get("content-length"); if (el && len) el.textContent = humanSize(+len); })
       .catch(() => { if (el) el.textContent = ""; });
   });
@@ -164,7 +205,7 @@ function animateCounters() {
       const step = (t) => {
         const p = Math.min(1, (t - t0) / dur);
         const val = Math.round(target * (1 - Math.pow(1 - p, 3)));
-        el.textContent = suffix + val.toLocaleString("es");
+        el.textContent = suffix + val.toLocaleString(T.locale);
         if (p < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);

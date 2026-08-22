@@ -10,10 +10,20 @@
 
 | File | Purpose |
 |---|---|
-| `data/devlog.js` | Devlog entries array. **Add at top.** |
-| `data/builds.js` | ROM download entries. **Add at top.** |
-| `assets/js/app.js` | Render + CONFIG. Update `CONFIG.repoUrl` for a different repo. |
+| `data/devlog.js` | Devlog entries array (ES, canonical). **Add at top.** |
+| `data/builds.js` | ROM download entries (ES, canonical). **Add at top.** |
+| `assets/js/app.js` | Render + CONFIG + `I18N` UI strings. Update `CONFIG.repoUrl` for a different repo. |
 | `index.html` | Uses `?v=YYYYMMDDx` query cache-busting. Bump suffix when editing. |
+
+## Languages (i18n)
+
+The site has three versions: **ES** at root (`index.html`), **EN** in `en/`, **pt-BR** in `pt/`. A switcher lives in the topbar nav of each page.
+
+- Every page sets `window.LANG` (`"es" | "en" | "pt"`) and `window.SITE_ROOT` (`"./"` or `"../"`) before loading scripts.
+- JS-generated strings (months, buttons, empty states) live in the `I18N` dict inside `app.js`.
+- Translated data: `data/devlog.en.js`, `data/devlog.pt-br.js`, `data/builds.en.js`, `data/builds.pt-br.js`.
+- **When adding a devlog entry or build, add it to ALL THREE language files** with identical `date`, media `src`, `file`, `version` and `status`; only `title/part/tags/captions/body/notes/highlights/codename` get translated.
+- Tags/categories are translated per file and must be internally consistent within each language (`DEVLOG_CATEGORIES` ↔ entry tags).
 
 ## Devlog entry format
 
