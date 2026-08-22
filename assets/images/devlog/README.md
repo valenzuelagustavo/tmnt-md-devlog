@@ -1,43 +1,82 @@
-# Capturas y gifs del devlog
+# TMNT 1989 Arcade a Mega Drive - Devlog 🐢🎮🍕
 
-Dejá acá las imágenes que aparecen en las entradas del devlog. Cada entrada
-declara sus archivos en el campo `media` de `data/devlog.js`. Mientras el
-archivo no exista, el sitio muestra un placeholder punteado con el nombre
-esperado; apenas subís el archivo con **ese nombre exacto**, la imagen
-aparece sola (no hay que tocar código).
+![TMNT Banner](https://via.placeholder.com/800x200/228B22/FFFFFF?text=TMNT+1989+Arcade+-+Mega+Drive+Devlog)
 
-## Archivos que el sitio ya está esperando
+Este repositorio contiene el código fuente de la página web oficial del **Devlog** dedicado a documentar el desarrollo del port del clásico arcade *Teenage Mutant Ninja Turtles* (Konami, 1989) para la consola Sega Mega Drive / Genesis.
 
-| Archivo                        | Entrada del devlog                          |
-|--------------------------------|---------------------------------------------|
-| `2026-07-22_voice_over.gif`        | Voz de arranque + globo "Attack!!"      |
-| `2026-07-22_foot_soldier_door.gif` | Foot soldier rompiendo la puerta        |
-| `2026-07-22_explosion.gif`         | Muerte del foot soldier con explosión   |
-| `2026-07-21_hud.png`           | HUD: barra de vida, vidas y puntaje         |
-| `2026-07-19_jump-kick.gif`     | Jump kick y el saltito del especial         |
-| `2026-07-19_combat.gif`        | Oleada de foot soldiers, IA de grupo        |
-| `2026-07-18_fire.gif`          | Fuego por streaming de tiles                |
-| `2026-07-15_scroll.gif`        | Scroll del nivel (ventana circular)         |
+## 📖 Sobre el Proyecto
 
-## Cómo agregar o cambiar un slot
+El objetivo de este proyecto web es compartir actualizaciones, artículos técnicos y avances del desarrollo del port no oficial del arcade de las Tortugas Ninja para la consola de 16 bits de Sega. 
 
-En `data/devlog.js`, dentro de la entrada, sumá o editá el array `media`:
+El sitio web servirá como un diario de desarrollo donde se explicarán los desafíos técnicos de adaptar un juego de arcade a las limitaciones del hardware de Mega Drive, incluyendo:
+- Gestión de paletas de colores (VDP).
+- Manejo de sprites y límite de tiles en pantalla.
+- Rutinas en ensamblador Motorola 68000 y el uso de SGDK.
+- Adaptación del sonido a los chips YM2612 y SN76489.
 
-```js
-media: [
-  { src: "mi-captura.gif", caption: "Texto que va debajo de la imagen" }
-],
+## ✨ Características del Sitio Web
+
+- **Artículos Técnicos (Deep Dives):** Explicaciones detalladas sobre cómo se logró emular o adaptar la lógica del arcade original.
+- **Galería Multimedia:** Capturas de pantalla, GIFs y videos mostrando el progreso del juego funcionando en emuladores y hardware real.
+- **Roadmap / Estado del Proyecto:** Una línea de tiempo interactiva con los hitos alcanzados (niveles completados, jefes programados, etc.).
+- **Newsletter:** Suscripción para recibir notificaciones de nuevas actualizaciones del port.
+- **Diseño Retro:** Interfaz de usuario inspirada en los años 90 y los menús de Mega Drive (scanlines, tipografías pixeladas, colores vibrantes).
+
+## 🛠️ Stack Tecnológico (Web)
+
+El sitio web está construido utilizando tecnologías modernas pero con un enfoque en la velocidad y la accesibilidad:
+
+- **Framework:** [Astro](https://astro.build/) / [Next.js] (Elige tu favorito para generación de sitios estáticos).
+- **Estilos:** Tailwind CSS con temas personalizados retro.
+- **Tipografía:** Fuentes pixel art alojadas localmente.
+- **Hosting:** Vercel / GitHub Pages.
+
+## 🚀 Instalación y Despliegue Local
+
+Si deseas correr este sitio web de devlog en tu entorno local para modificarlo o contribuir:
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/tmnt-megadrive-devlog.git
+   cd tmnt-megadrive-devlog
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Iniciar el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+
+4. Abre `http://localhost:3000` en tu navegador para ver la página en vivo.
+
+## 📝 Estructura de Contenidos (Markdown)
+
+Los posts del devlog se gestionan de forma estática utilizando archivos Markdown (`.md` / `.mdx`). Para agregar una nueva entrada al devlog, simplemente crea un archivo en la carpeta `src/content/devlog/`:
+
+```markdown
+---
+title: "Adaptando la paleta de colores de April O'Neil"
+date: 2026-08-25
+author: "Dev"
+tags: ["VDP", "Gráficos", "SGDK"]
+---
+Contenido del post aquí...
 ```
 
-- `src`  → nombre del archivo dentro de esta carpeta.
-- `caption` → epígrafe (opcional).
+## 🤝 Contribuciones
 
-Si no querés un slot, borrá ese objeto del array (o el campo `media` entero).
+Este repositorio es para la **página web del devlog**. Si deseas contribuir al código fuente del port del juego (C/Assembly), por favor dirígete al repositorio principal del juego [enlace al repo del juego]. 
 
-## Consejos para los gifs
+Para mejoras en el sitio web (correcciones de estilo, traducciones o accesibilidad), los *Pull Requests* son bienvenidos.
 
-- Tamaño de captura nativo de la Mega Drive: 320×224 (o 256×224). Mantener esa
-  proporción hace que el pixel-art se vea nítido (el CSS usa
-  `image-rendering: pixelated`).
-- Para que pesen poco: recortá a la zona de acción, 2–4 segundos, ~12–15 fps.
-- PNG para pantallas fijas (HUD, menús), GIF para animaciones.
+## 📜 Licencia
+
+El código fuente de este sitio web está bajo la licencia [MIT](LICENSE). 
+*Nota: Teenage Mutant Ninja Turtles es propiedad de Viacom/Nickelodeon. El juego original de 1989 fue desarrollado por Konami. Este es un proyecto de fans sin fines de lucro (Fan-game/Port) y no está afiliado con las empresas mencionadas.*
+
+---
+**Cowabunga!** 🍕🐢
